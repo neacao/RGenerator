@@ -10,14 +10,6 @@
 
 @implementation R
 
-+ (NSString *)title1 {
-	return L_STR(@"title1");
-}
-
-+ (NSString *)title2 {
-	return L_STR(@"title2");
-}
-
 // <REPLACE>
 
 @end

@@ -8,4 +8,4 @@ This project aim to automate generate constant strings, color, font for iOS Deve
 3. The contents were putted in strings.json have been sorted follow the second parameter
 
 ## Example
-./generator ProjectRoot en,vi
+./watcher ProjectRoot/strings.json
