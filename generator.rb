@@ -24,7 +24,7 @@ def gen(projectRootPath, languageKeysSupporting)
 	contectDict = {}
 
 	# Assign data to memory to write files
-	jsonData.each do |title, value| # Multiple language have to split by "|"
+	jsonData.each do |title, value| 
 		titles << title
 		components = value.split("|")
 		languageKeys.each_with_index do |lKey, idx|
