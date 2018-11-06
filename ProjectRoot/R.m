@@ -14,6 +14,14 @@
 	return LOCALIZE_STRING(@"title1");
 }
 
++ (NSString *)writeRClass {
+	return LOCALIZE_STRING(@"writeRClass");
+}
+
++ (NSString *)writeRClass {
+	return LOCALIZE_STRING(@"writeRClass");
+}
+
 // <REPLACE>
 
 @end
