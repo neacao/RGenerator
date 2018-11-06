@@ -17,8 +17,8 @@ if [[ $# -eq 0 ]] ; then
     exit 1
 fi
 
-# Kill fswatch
-pgrep ^^fswatch | xargs kill
+# Stop previous fswatch running if needed
+pgrep fswatch | xargs kill
 
 # Runnning
 echo "Watching $1"
