@@ -13,13 +13,8 @@
 + (NSString *)title1 {
 	return LOCALIZE_STRING(@"title1");
 }
-
-+ (NSString *)writeRClass {
-	return LOCALIZE_STRING(@"writeRClass");
-}
-
-+ (NSString *)writeRClass {
-	return LOCALIZE_STRING(@"writeRClass");
++ (NSString *)title2 {
+	return LOCALIZE_STRING(@"title2");
 }
 
 // <REPLACE>

@@ -8,26 +8,20 @@ class Writer
 		@localizeFilePath = localizeFilePath
 	end
 
-	def writeR(key)
-		unless @rFilePath
-			p "Not found R file location with @rFilePath"
-			return
-		end
-
+	def writeR(keys)
 		headerPath 		= "#{@rFilePath}/R.h"
 		implementPath 	= "#{@rFilePath}/R.m"
-		unless File.file?(headerPath) or File.file?(implementPath)
-			p "Not found hedaer: #{headerPath} or implement: #{implementPath}"
-			return
-		end
-		# -----
 
 		# Build string
-		propertyH = "@property (class, nonatomic, readonly) NSString* <PROPERTY_KEY>;\n".gsub! '<PROPERTY_KEY>', key
-		propertyH += "\n\/\/ <REPLACE>"
+		propertyH = ""
+		propertyM = ""
 
-		propertyM = "+ (NSString *)<PROPERTY_KEY> {\n\treturn LOCALIZE_STRING(@\"<PROPERTY_NAME>\");\n}\n".gsub! '<PROPERTY_KEY>', key
-		propertyM = propertyM.gsub! '<PROPERTY_NAME>', key
+		keys.each do |key|
+			propertyH += appendHeaderContent(key)
+			propertyM += appendImplementationContent(key)
+		end
+		
+		propertyH += "\n\/\/ <REPLACE>"
 		propertyM += "\n\/\/ <REPLACE>"
 
 		# Header replacement
@@ -41,19 +35,28 @@ class Writer
 		open(implementPath, 'w') { |file| file.puts newContents }
 	end
 
-	def writeLocalizeString(lanugage, key, value)
-		unless @localizeFilePath
-			p "Not found l@ocalizeFilePath"
-			return
-		end
 
-		filePath = "#{@localizeFilePath}/#{lanugage}.lproj/Localize.strings"
-		unless File.file?(filePath)
-			p "Not found Localize.strings in filePath #{filePath}"
-			return
+	# contentArray = { "en": {"title1": "content1", "title2": "content2"}, {"vi": {"chủ đề 1": "nội dung 1"}} }
+	def writeLocalizeString(contentDict)
+		contentDict.each do |languageKey, dict|
+			contentStr = ""
+			dict.each do |title, content|
+				contentStr += "\"#{title}\" = \"#{content}\";\n"
+			end
+			open("#{@localizeFilePath}/#{languageKey}.lproj/Localize.strings", 'a') { |f| f << contentStr }
 		end
-
-		open(filePath, 'a') { |f| f << "\"#{key}\" = \"#{value}\";\n" }
 	end
+
+
+	private
+		def appendHeaderContent(key)
+			propertyH = "@property (class, nonatomic, readonly) NSString* #{key};\n"
+			propertyH
+		end
+
+		def appendImplementationContent(key)
+			propertyM = "+ (NSString *)#{key} {\n\treturn LOCALIZE_STRING(@\"#{key}\");\n}\n"
+			propertyM
+		end
 
 end
