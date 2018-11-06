@@ -41,7 +41,7 @@ def gen(projectRootPath, languageKeysSupporting)
 	writer.writeR(titles)
 	writer.writeLocalizeString(contectDict)
 
-	p "Generate is done !!!"
+	p "Generation is done !!!"
 end
 
 def usage 
