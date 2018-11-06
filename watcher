@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Install brew if needed
+which -s brew
+if [[ $? != 0 ]] ; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Install fswatch if needed
+which -s fswatch
+if [[ $? != 0 ]] ; then
+    brew install fswatch
+fi
+
+if [[ $# -eq 0 ]] ; then
+  	echo "Enter your strings.json file"
+    exit 1
+fi
+
+# Kill fswatch
+pgrep ^^fswatch | xargs kill
+
+# Runnning
+echo "Watching $1"
+
+fswatch -o $1 | xargs -n 1 -I {} ./generator.rb {}

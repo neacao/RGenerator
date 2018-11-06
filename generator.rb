@@ -51,7 +51,8 @@ def usage
 end
 
 
-gen(ARGV[0], ARGV[1])
+# Change this as where your project root located
+gen("ProjectRoot/", "en,vi")
 
 
 

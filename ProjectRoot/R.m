@@ -4,17 +4,18 @@
 //  Created by neacao
 //
 
-#define LOCALIZE_STRING(key) [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:key];
+#define L_STR(key) [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:key];
 
 #import "R.h"
 
 @implementation R
 
 + (NSString *)title1 {
-	return LOCALIZE_STRING(@"title1");
+	return L_STR(@"title1");
 }
+
 + (NSString *)title2 {
-	return LOCALIZE_STRING(@"title2");
+	return L_STR(@"title2");
 }
 
 // <REPLACE>

@@ -21,8 +21,8 @@ class Writer
 			propertyM += appendImplementationContent(key)
 		end
 		
-		propertyH += "\n\/\/ <REPLACE>"
-		propertyM += "\n\/\/ <REPLACE>"
+		propertyH += "\/\/ <REPLACE>"
+		propertyM += "\/\/ <REPLACE>"
 
 		# Header replacement
 		file = File.read(headerPath)
@@ -50,12 +50,12 @@ class Writer
 
 	private
 		def appendHeaderContent(key)
-			propertyH = "@property (class, nonatomic, readonly) NSString* #{key};\n"
+			propertyH = "@property (class, nonatomic, readonly) NSString* #{key};\n\n"
 			propertyH
 		end
 
 		def appendImplementationContent(key)
-			propertyM = "+ (NSString *)#{key} {\n\treturn LOCALIZE_STRING(@\"#{key}\");\n}\n"
+			propertyM = "+ (NSString *)#{key} {\n\treturn L_STR(@\"#{key}\");\n}\n\n"
 			propertyM
 		end
 
